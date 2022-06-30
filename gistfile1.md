@@ -20,7 +20,7 @@ Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les v
 1. Saca en una consulta cuantos apartamentos hay en España.
 
 ```javascript
-//TODO pegar consulta prueba update
+//TODO pegar consulta prueba subida trabajo
 ```
 
 2. Lista los 10 primeros:
