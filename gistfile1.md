@@ -14,13 +14,14 @@ En este base de datos puedes encontrar un montón de apartementos y sus reviews,
 
 Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les ves a como está almacenada la información?
 
+Los principales problemas que presenta mongo es la limitación en el tamaño de los documentos y que en el proceso de escritura(creación, modificación o eliminación) el tiempo que duran estas operaciones se bloquea todo el acceso a la base de datos donde se produce dicho proceso. En nuestro caso vemos que trabajamos en un solo documento además se observa que las opiniones(reviews) que los clientes escriben, puede agravar el problema de bloque que produce dicha escritura.
+
 ## Consultas
 ### Básico
 
 1. Saca en una consulta cuantos apartamentos hay en España.
 
 ```javascript
-//TODO pegar consulta prueba subida trabajo
 
 db.listingsAndReviews.countDocuments(
 {
@@ -35,7 +36,7 @@ db.listingsAndReviews.countDocuments(
         Ordenados por precio.
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.find(
   {
   "address.country": "Spain"
@@ -58,7 +59,7 @@ db.listingsAndReviews.find(
         Dos cuartos de baño.
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.find(
  {
   $and:[
@@ -72,7 +73,7 @@ db.listingsAndReviews.find(
 2. Al requisito anterior,hay que añadir que nos gusta la tecnología queremos que el apartamento tenga wifi.
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.find(
  {
   $and:[
@@ -87,7 +88,7 @@ db.listingsAndReviews.find(
 3. Y bueno, un amigo se ha unido que trae un perro, así que a la query anterior tenemos que buscar que permitan mascota Pets Allowed
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.find(
  {
   $and:[
@@ -110,7 +111,7 @@ db.listingsAndReviews.find(
 1. Estamos entre ir a Barcelona o a Portugal, los dos destinos nos valen, peeero... queremos que el precio nos salga baratito (50 $), y que tenga buen rating de reviews
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.find(
   
   {
@@ -142,7 +143,7 @@ db.listingsAndReviews.find(
         El precio (no queremos mostrar un objeto, sólo el campo de precio)
 
 ```javascript
-//TODO pegar consulta
+
 db.listingsAndReviews.aggregate([
   {
     $match:{
@@ -166,37 +167,22 @@ db.listingsAndReviews.aggregate([
 2. Queremos saber cuantos alojamientos hay disponibles por pais.
 
 ```javascript
-//TODO pegar consulta
-```
 
-## Opcional
+db.listingsAndReviews.aggregate([
+  {
+    $group:{
+      _id:'$address.country',
+      total:{
+        $sum:1
+      }
+    }
+  },
+  {
+    $project:{
+      _id:1,
+      total:1
+    }
+  }
 
-1. Queremos saber el precio medio de alquiler de airbnb en España.
-
-```javascript
-//TODO pegar consulta
-```
-
-2. ¿Y si quisieramos hacer como el anterior, pero sacarlo por paises?
-
-```javascript
-//TODO pegar consulta
-```
-
-3. Repite los mismos pasos pero agrupando también por numero de habitaciones.
-
-```javascript
-//TODO pegar consulta
-```
-
-## Desafío
-
-1. Queremos mostrar el top 5 de apartamentos más caros en España, y sacar los siguentes campos:
-
-    Nombre.
-    Ciudad.
-    Amenities, pero en vez de un array, un string con todos los ammenities.
-
-```javascript
-//TODO pegar consulta
+])
 ```
