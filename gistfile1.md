@@ -21,6 +21,13 @@ Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les v
 
 ```javascript
 //TODO pegar consulta prueba subida trabajo
+
+db.listingsAndReviews.countDocuments(
+{
+"address.country": "Spain"
+}  
+)
+
 ```
 
 2. Lista los 10 primeros:
@@ -29,6 +36,19 @@ Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les v
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.find(
+  {
+  "address.country": "Spain"
+  },
+  {
+    _id:0,
+    name:1,
+    beds:1,
+    price:1,
+    "address.government_area":1
+  }
+).limit(10).sort("price")
+
 ```
 
 ### Filtrando
@@ -39,18 +59,50 @@ Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les v
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.find(
+ {
+  $and:[
+    {beds:4},
+    {bathrooms: 2}
+  ]
+ }
+)
 ```
 
 2. Al requisito anterior,hay que añadir que nos gusta la tecnología queremos que el apartamento tenga wifi.
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.find(
+ {
+  $and:[
+    {beds:4},
+    {bathrooms: 2},
+    {amenities: 'Wifi'}
+  ]
+ },
+)
 ```
 
 3. Y bueno, un amigo se ha unido que trae un perro, así que a la query anterior tenemos que buscar que permitan mascota Pets Allowed
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.find(
+ {
+  $and:[
+    {beds:4},
+    {bathrooms: 2},
+    {amenities: 
+      {
+        "$all": ["Wifi","Pets allowed"]
+      }
+    
+    }
+  ]
+ },
+)
+
 ```
 
 ### Operadores lógicos
