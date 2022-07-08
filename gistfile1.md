@@ -14,7 +14,7 @@ En este base de datos puedes encontrar un montón de apartementos y sus reviews,
 
 Pregunta Si montarás un sitio real, ¿Qué posible problemas pontenciales les ves a como está almacenada la información?
 
-Los principales problemas que presenta mongo es la limitación en el tamaño de los documentos y que en el proceso de escritura(creación, modificación o eliminación) el tiempo que duran estas operaciones se bloquea todo el acceso a la base de datos donde se produce dicho proceso. En nuestro caso vemos que trabajamos en un solo documento además se observa que las opiniones(reviews) que los clientes escriben, puede agravar el problema de bloque que produce dicha escritura.
+Los principales problemas que presenta mongo es la limitación en el tamaño de los documentos y que en el proceso de escritura(creación, modificación o eliminación) el tiempo que duran estas operaciones se bloquea todo el acceso a la base de datos donde se produce dicho proceso. En nuestro caso vemos que trabajamos en un solo documento además se observa que las opiniones(reviews) que los clientes escriben, puede agravar el problema de bloqueo que produce dicha escritura.
 
 ## Consultas
 ### Básico
