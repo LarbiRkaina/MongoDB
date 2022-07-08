@@ -111,6 +111,26 @@ db.listingsAndReviews.find(
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.find(
+  
+  {
+    $and: [
+    
+      {price:50},
+      {'review_scores.review_scores_rating' : {$gt:80}},
+      { 
+        $or: [
+          
+            {"address.market": 'Barcelona'},
+            {"address.country": 'Portugal'}
+          
+          ]
+      }
+    ]
+
+  }
+  
+);
 ```
 
 ## Agregaciones
@@ -123,6 +143,24 @@ db.listingsAndReviews.find(
 
 ```javascript
 //TODO pegar consulta
+db.listingsAndReviews.aggregate([
+  {
+    $match:{
+      "address.country": "Spain"
+    }
+  },
+  {
+  
+    $project: {
+      name:1,
+      "country": "address.country",
+      _id:0,
+      "price":1
+     
+    }
+  },
+
+])
 ```
 
 2. Queremos saber cuantos alojamientos hay disponibles por pais.
